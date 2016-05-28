@@ -74,9 +74,12 @@ class Match
   property :duration, Integer
 end
 
-#DataMapper::Logger.new($stdout, :debug)
-DataMapper.setup(:default, 'sqlite:///home/suso/futbolin/foos.db')
-DataMapper.repository(:default).adapter.resource_naming_convention = DataMapper::NamingConventions::Resource::UnderscoredAndPluralizedWithoutModule
-DataMapper.finalize
+def setup(db_uri)
+  #DataMapper::Logger.new($stdout, :debug)
+  DataMapper.setup(:default, db_uri)
+  DataMapper.repository(:default).adapter.resource_naming_convention = DataMapper::NamingConventions::Resource::UnderscoredAndPluralizedWithoutModule
+  DataMapper.finalize
+end
 
+module_function :setup
 end
