@@ -2,6 +2,8 @@ $LOAD_PATH << '.'
 
 require 'boostrap'
 require 'sinatra'
+require 'conf'
+
 require 'tilt/erb'
 
 require 'season_repository'
@@ -388,6 +390,12 @@ get '/api/get_open_matches' do
   end
 
   json_api(response)
+end
+
+before '/api/set_*' do
+  if params['apiKey'] != Conf.settings.api_key
+    halt 403
+  end
 end
 
 post '/api/set_result' do

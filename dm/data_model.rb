@@ -1,5 +1,6 @@
 require 'data_mapper'
 require 'dm-migrations'
+require 'conf'
 
 module DataModel
 
@@ -88,7 +89,7 @@ class Match
 end
 
 #DataMapper::Logger.new($stdout, :debug)
-DataMapper.setup(:default, ENV["DATABASE"] || 'sqlite:///home/suso/futbolin/foos.db')
+DataMapper.setup(:default, Conf.settings.db_uri)
 DataMapper.repository(:default).adapter.resource_naming_convention = DataMapper::NamingConventions::Resource::UnderscoredAndPluralizedWithoutModule
 DataMapper.finalize
 
